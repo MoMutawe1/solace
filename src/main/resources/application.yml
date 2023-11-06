@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    function:
+      definition: uppercase
+    stream:
+      bindings:
+        sink-in-0:
+          #When we consume events we consume from a queue.
+          destination: 'EVENT-PROCESSOR-QUEUE'
+      solace:
+        bindings:
+          sink-in-0:
+            consumer:
+              #This adds a topic subscription w/ wildcards to the queue created.
+              queueAdditionalSubscriptions: solace/devsess/nam/>,solace/devsess/*/officehours/202301*
+
